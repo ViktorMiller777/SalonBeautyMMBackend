@@ -12,4 +12,7 @@ class ServiciosController{
         $res=new Success($res);
         $res->Send();
     }
+    public function hola(){
+        echo 'hola';
+    }
 }

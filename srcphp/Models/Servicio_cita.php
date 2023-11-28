@@ -9,13 +9,14 @@ use proyecto\Response\Success;
 class Servicio_cita extends Models{
     public $id;
     public $id_servicio;
-    public $id_cliente;
+    public $id_cita;
     public $precio;
     public $duracion_min;
     public $fecha_hora;
     public $estado;
 
     protected $filleable=[
+        "id",
         "id_servicio",
         "id_cita",
         "precio",

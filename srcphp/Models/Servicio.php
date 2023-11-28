@@ -12,7 +12,7 @@ class Servicio extends Models{
     public $precio;
     public $descripcion;
     public $img;
-    public $duracion_img;
+    public $duracion_min;
     public $categoria;
     public $activo;
 
@@ -22,7 +22,7 @@ class Servicio extends Models{
         "precio",
         "descripcion",
         "img",
-        "duracion_img",
+        "duracion_min",
         "categoria",
         "activo",
     ];

@@ -9,7 +9,7 @@ use proyecto\Response\Success;
 class CategoriasController{
     public function cat(){
         $res=Table::query('Select * from categorias');
-        $res=new Success();
+        $res=new Success($res);
         $res->Send();
     }
 

@@ -21,7 +21,7 @@ class Table
 }
     static function query($query)
     {
-        $cc = new  Conexion("estetica", "localhost", "root", "");
+        $cc = new  Conexion("estetica", "localhost:3306", "root", "1234");
         self::$pdo = $cc->getPDO();
         $stmt = self::$pdo->query($query);
         $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
