@@ -13,7 +13,7 @@
         public $dbname = "estetica";
         public $host = "localhost:3306";
         public $user = "root";
-        public $password = "1234";
+        public $password = "";
         /**ic
          * Conexion constructor.
          * @param string $dbname

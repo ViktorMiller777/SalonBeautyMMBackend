@@ -12,6 +12,7 @@ use proyecto\Response\Failure;
 use proyecto\Response\Success;
 
 Router::get('/servicios',[ServiciosController::class,'service']);
+Router::post('/servicios',[ServiciosController::class,'service']);
 Router::get('/categorias',[CategoriasController::class,'cat']);
 Router::get('/servicio_cita',[SCitasController::class,'citas']);
 Router::get('/usuario/buscar/$id', function ($id) {

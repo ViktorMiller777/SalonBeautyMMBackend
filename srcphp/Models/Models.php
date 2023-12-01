@@ -20,7 +20,7 @@
 
         public function __construct()
         {
-            $cc = new  Conexion("estetica", "localhost:3306", "root", "1234");
+            $cc = new  Conexion("estetica", "localhost:3306", "root", "");
             self::$pdo = $cc->getPDO();
         }
         public function create(array $obj)

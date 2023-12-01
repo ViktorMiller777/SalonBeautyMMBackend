@@ -11,7 +11,7 @@ class SCitasController{
     
     public function citas(){
         $res=Table::query("select servicio_cita.id as id, servicios.nombre as Servicio, concat(usuarios.nombre,' ',usuarios.apellido_paterno,' ',apellido_materno ) as Cliente,
-        servicio_cita.precio,  servicio_cita.duracion_min, fecha_hora, servicio_cita.estado from servicio_cita
+        servicio_cita.precio,  servicio_cita.duracion_min, fecha_hora, registro_citas.estado from servicio_cita
         inner join servicios on servicio_cita.id_servicio=servicios.id
         inner join registro_citas on registro_citas.id = servicio_cita.id_cita
         inner join usuarios on registro_citas.cliente=usuarios.id;");
