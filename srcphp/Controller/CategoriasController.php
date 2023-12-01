@@ -7,13 +7,9 @@ use proyecto\Response\Failure;
 use proyecto\Response\Success;
 
 class CategoriasController{
-    public function cat(){
-        $res=Table::query('Select * from categorias');
-        $res=new Success();
+    public function categories(){
+        $res=Table::query("Select * from categorias");
+        $res=new Success($res);
         $res->Send();
-    }
-
-    public function patron(){
-        echo "hola bienvenido";
     }
 }

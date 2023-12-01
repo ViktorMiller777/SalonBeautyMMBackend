@@ -5,15 +5,20 @@ require("../vendor/autoload.php");
 
 use PDO;
 use proyecto\Models\Models;
-use proyecto\Controller\SCitasController;
-use proyecto\Controller\CategoriasController;
 use proyecto\Controller\ServiciosController;
+use proyecto\Controller\CategoriasController;
+use proyecto\Controller\RegistroCitasController;
 use proyecto\Response\Failure;
 use proyecto\Response\Success;
 
-Router::get('/servicios',[ServiciosController::class,'service']);
-Router::get('/categorias',[CategoriasController::class,'cat']);
-Router::get('/servicio_cita',[SCitasController::class,'citas']);
+//Metodos post//
+
+// Metodos get //
+Router::get('/servicios',[ServiciosController::class,'servicios']);
+Router::get('/registro_citas',[RegistroCitasController::class,'registros']);
+Router::get('/categorias',[CategoriasController::class,'categories']);
+
+
 Router::get('/usuario/buscar/$id', function ($id) {
 
     $user= User::find($id);
