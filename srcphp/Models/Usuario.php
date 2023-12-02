@@ -2,12 +2,15 @@
 namespace proyecto\Models;
 
 use PDO;
-use proyecto\Models\Table;
+use proyecto\Auth;
+use proyecto\Response\Failure;
+use proyecto\Response\Response;
 use proyecto\Response\Success;
+use function json_encode;
 
 class Usuario extends Models{
     public $id;
-    public $nombre;
+    public $user;
     public $apellido_paterno;
     public $apellido_materno;
     public $correo;
@@ -16,7 +19,7 @@ class Usuario extends Models{
     public $id_rol;
 
     protected $filleable=[
-        "nombre",
+        "user",
         "apellido_paterno",
         "apellido_materno",
         "correo",
@@ -25,24 +28,22 @@ class Usuario extends Models{
         "id_rol",
     ];
 
-    public $table="usuarios";
-
-    public static function auth($correo, $contrasena):Response
+    public static function auth($user, $contrasena):Response
     {
         $class = get_called_class();
         $c = new $class();
-        $stmt = self::$pdo->prepare("select *  from $c->table  where  correo =:correo  and contra=:contrasna");
-        $stmt->bindParam(":correo", $correo);
-        $stmt->bindParam(":contrasena", $contra);
+        $stmt = self::$pdo->prepare("select *  from $c->table  where  user =:user  and contrasena=:contrasena");
+        $stmt->bindParam(":user", $user);
+        $stmt->bindParam(":contrasena", $contrasena);
         $stmt->execute();
-        $resultados = $stmt->fetchAll(PDO::FETCH_CLASS,Usuarios::class);
+        $resultados = $stmt->fetchAll(PDO::FETCH_CLASS,Usuario::class);
 
         if ($resultados) {
 //            Auth::setUser($resultados[0]);  pendiente
             $r=new Success(["usuario"=>$resultados[0],"_token"=>Auth::generateToken([$resultados[0]->id])]);
-            return  $r->Send();
+           return  $r->Send();
         }
-        $r=new Failure(401,"Correo o contraseña incorrectos");
+        $r=new Failure(401,"Usuario o contraseña incorrectos");
         return $r->Send();
 
     }
