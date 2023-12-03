@@ -2,6 +2,7 @@
 namespace proyecto\Models;
 
 use PDO;
+use Carbon\Carbon;
 use proyecto\Auth;
 use proyecto\Response\Failure;
 use proyecto\Response\Response;
@@ -27,7 +28,8 @@ class Usuario extends Models{
         "telefono",
         "id_rol",
     ];
-
+    public $table="usuarios";
+    
     public static function auth($user, $contrasena):Response
     {
         $class = get_called_class();
