@@ -14,4 +14,11 @@ class ServiciosController{
         $res=new Success($res);
         $res->Send();
     }
+    public function mostrar(){
+        $res=Table::query("select id,nombre,
+        duracion_min as duracion,precio,categoria
+        from servicios where activo=1");
+        $res=new Success($res);
+        $res->Send();
+    }
 }

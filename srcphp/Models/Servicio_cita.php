@@ -13,6 +13,7 @@ class Servicio_cita extends Models{
     public $precio;
     public $duracion_min;
     public $fecha_hora;
+    public $tipo;
 
     protected $filleable=[
         "id_servicio",
@@ -20,6 +21,7 @@ class Servicio_cita extends Models{
         "precio",
         "duracion_min",
         "fecha_hora",
+        "tipo"
     ];
 
     public $table ="servicio_cita";
