@@ -7,23 +7,25 @@ use proyecto\Response\Success;
 
 class Registro_cita extends Models{
     public $id;
-    public $id_cita;
+    public $cliente;
     public $costo;
     public $fecha_hora_inicio;
-    public $fecha_hora_final;
+    public $fecha_hora_fin;
     public $duracion_total;
     public $estado;
     public $fecha_cita;
+    public $tipo;
     public $desc_rechazo;
 
     protected $filleable=[
-        "id_cita",
+        "cliente",
         "costo",
         "fecha_hora_inicio",
-        "fecha_hora_final",
+        "fecha_hora_fin",
         "duracion_total",
         "estado",
         "fecha_cita",
+        "tipo",
         "desc_rechazo",
     ];
 
