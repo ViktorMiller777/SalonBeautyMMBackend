@@ -11,9 +11,9 @@
          */
         public static $DB = null;
         public $dbname = "estetica";
-        public $host = "localhost";
+        public $host = "18.218.1.15:3306";
         public $user = "root";
-        public $password = "";
+        public $password = "04063017";
         /**ic
          * Conexion constructor.
          * @param string $dbname
