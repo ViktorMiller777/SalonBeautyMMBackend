@@ -79,7 +79,7 @@
                 $stmt = self::$pdo->prepare("delete from   $c->table where $cid=:id");
                 $stmt->bindParam(":id",$id);
                 $stmt->execute();
-                }
+                } 
             catch (Exception $e) {
                 return $e;
             }

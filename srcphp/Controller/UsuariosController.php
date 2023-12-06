@@ -19,11 +19,11 @@ class UsuariosController{
             $JSONData = file_get_contents('php://input');
             $dataObject = json_decode($JSONData);
             $user = new Usuario();
-            $user->user=$dataObject->user;
+            $user->nombre=$dataObject->user;
             $user->apellido_paterno=$dataObject->apellido_paterno;
             $user->apellido_materno=$dataObject->apellido_materno;
-            $user->correo=$dataObject->correo;
-            $user->contrasena=$dataObject->contrasena;
+            $user->user=$dataObject->user;
+            $user->contrasena= password_hash($dataObject->contrasena, PASSWORD_DEFAULT);
             $user->telefono=$dataObject->telefono;
             $user->Save();
 

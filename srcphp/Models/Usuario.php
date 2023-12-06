@@ -34,19 +34,19 @@ class Usuario extends Models{
     {
         $class = get_called_class();
         $c = new $class();
-        $stmt = self::$pdo->prepare("select *  from $c->table  where  user =:user  and contrasena=:contrasena");
+        $stmt = self::$pdo->prepare("select *  from $c->table  where  user =:user");
         $stmt->bindParam(":user", $user);
-        $stmt->bindParam(":contrasena", $contrasena);
         $stmt->execute();
         $resultados = $stmt->fetchAll(PDO::FETCH_CLASS,Usuario::class);
 
         if ($resultados) {
-//            Auth::setUser($resultados[0]);  pendiente
-            $r=new Success(["usuario"=>$resultados[0],"_token"=>Auth::generateToken([$resultados[0]->id])]);
-           return  $r->Send();
+            $hashpass=$resultados[0]->contrasena;
+            if(password_verify($contrasena, $hashpass)){
+                $r=new Success(["usuario"=>$resultados[0],"_token"=>Auth::generateToken([$resultados[0]->id])]);
+                return  $r->Send();
+            }
         }
         $r=new Failure(401,"Usuario o contraseña incorrectos");
         return $r->Send();
-
     }
 }

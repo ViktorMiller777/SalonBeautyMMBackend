@@ -9,6 +9,7 @@ use proyecto\Controller\UsuariosController;
 use proyecto\Controller\ServiciosController;
 use proyecto\Controller\CategoriasController;
 use proyecto\Controller\RegistroCitasController;
+use proyecto\Controller\ServiciosCitasController;
 use proyecto\Response\Failure;
 use proyecto\Response\Success;
 // Metodo header para poder resivir solicitudes de cualquier dominio //
@@ -16,6 +17,7 @@ Router::headers();
 
 //Metodos post//
 Router::post('/registrar_usuario',[UsuariosController::class,"Register"]);
+Router::post('/eliminar_servicio',[ServiciosCitasController::class,"borrar_cita"]);
 Router::post('/auth',[UsuariosController::class,"auth"]);
 // Metodos get //
 Router::get('/usuarios',[UsuariosController::class,"mostrarUsuarios"]);
