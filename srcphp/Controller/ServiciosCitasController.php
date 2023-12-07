@@ -110,11 +110,11 @@ class ServiciosCitasController{
             $rowsAffected = $stmt->rowCount();
     
             if ($rowsAffected === 0) {
-                throw new \Exception("No se encontró el cliente con el ID proporcionado");
+                throw new \Exception("No se encontró el servicio con el ID proporcionado");
             }
     
             header('Content-Type: application/json');
-            echo json_encode(['message' => 'Cliente actualizado exitosamente.']);
+            echo json_encode(['message' => 'servicio actualizado exitosamente.']);
             http_response_code(200);
     
         } catch (\Exception $e) {
@@ -184,11 +184,11 @@ class ServiciosCitasController{
             $rowsAffected = $stmt->rowCount();
     
             if ($rowsAffected === 0) {
-                throw new \Exception("No se encontró el cliente con el ID proporcionado");
+                throw new \Exception("No se encontró el servicio con el ID proporcionado");
             }
     
             header('Content-Type: application/json');
-            echo json_encode(['message' => 'Cliente actualizado exitosamente.']);
+            echo json_encode(['message' => 'servicio actualizado exitosamente.']);
             http_response_code(200);
     
         } catch (\Exception $e) {
