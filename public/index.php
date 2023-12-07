@@ -14,8 +14,9 @@ use proyecto\Response\Failure;
 use proyecto\Response\Success;
 // Metodo header para poder resivir solicitudes de cualquier dominio //
 Router::headers();
-
 //Metodos post//
+Router::post('/servicio_cita/actualizar',[ServiciosCitasController::class,"actualizarServicioCita"]);
+Router::post('/registro_citas/actualizar',[RegistroCitasController::class,"actualizarRegistroCita"]);
 Router::post('/registrar_usuario',[UsuariosController::class,"Register"]);
 Router::post('/eliminar_servicio',[ServiciosCitasController::class,"borrar_cita"]);
 Router::post('/auth',[UsuariosController::class,"auth"]);

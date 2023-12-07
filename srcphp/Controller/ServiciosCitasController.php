@@ -8,8 +8,14 @@ use proyecto\Models\Table;
 use proyecto\Models\Servicio_cita;
 use proyecto\Response\Failure;
 use proyecto\Response\Success;
+use proyecto\Conexion;
 
 class ServiciosCitasController{
+    private $conexion;
+    public function __construct() {
+        $this->conexion = new Conexion('estetica', 'localhost', 'root', '');
+    }
+
     
     public function citas(){
         $res=Table::query("select * from servicio_cita");
@@ -57,75 +63,140 @@ class ServiciosCitasController{
             return $sc ->Send();
         }
     }
-    // funcion para actualizar el estado de las citas 
-    function updateServicioCitas (){
+    function actualizarServicioCita()
+    {
         try {
             $JSONData = file_get_contents("php://input");
             $dataObject = json_decode($JSONData);
-
-            $estado = $dataObject->estado;           
-
-            $service = $this->updateServicioCitasQuerry($estado);
-            $response = ['data' => $service];
-
-
-            header('Content-Type: application/json');
-            echo json_encode(['message' => 'Procedimiento ejecutado correctamente', 'data' => $response]);
+    
+            // Checking if id is provided
+            if (!property_exists($dataObject, 'id')) {
+                throw new \Exception("Debe proporcionar el ID del servicio_cita para actualizar");
+            }
+    
+            $id = $dataObject->id;
+    
+            $sql = "UPDATE servicio_cita SET ";
+            $values = [];
             
+            if (property_exists($dataObject, 'id_servicio')) {
+                $sql .= "id_servicio = :id_servicio, ";
+                $values[':id_servicio'] = $dataObject->id_servicio;
+            }
+            if (property_exists($dataObject, 'id_cita')) {
+                $sql .= "id_cita = :id_cita, ";
+                $values[':id_cita'] = $dataObject->id_cita;
+            }
+            if (property_exists($dataObject, 'precio')) {
+                $sql .= "precio = :precio, ";
+                $values[':precio'] = $dataObject->precio;
+            }
+            if (property_exists($dataObject, 'duracion_min')) {
+                $sql .= "duracion_min = :duracion_min, ";
+                $values[':duracion_min'] = $dataObject->duracion_min;
+            }
+            if (property_exists($dataObject, 'fecha_hora')) {
+                $sql .= "fecha_hora= :fecha_hora, ";
+                $values[':fecha_hora'] = $dataObject->fecha_hora;
+            }
+    
+            // Remove trailing comma and add WHERE clause
+            $sql = rtrim($sql, ', ') . " WHERE id = :id";
+            $values[':id'] = $id;
+    
+            $stmt = $this->conexion->getPDO()->prepare($sql);
+            $stmt->execute($values);
+    
+            $rowsAffected = $stmt->rowCount();
+    
+            if ($rowsAffected === 0) {
+                throw new \Exception("No se encontró el cliente con el ID proporcionado");
+            }
+    
+            header('Content-Type: application/json');
+            echo json_encode(['message' => 'Cliente actualizado exitosamente.']);
+            http_response_code(200);
+    
         } catch (\Exception $e) {
             $errorResponse = ['message' => "Error en el servidor: " . $e->getMessage()];
             header('Content-Type: application/json');
             echo json_encode($errorResponse);
             http_response_code(500);
         }
-    }
-
-    function updateServicioCitasQuerry($estado) {
-        // aca va la consulta que hacer el update 
-        $r = table::queryParams("CALL Consulta(:estado)",
-            
-            [
-                'estado'=> $estado,
-            ]
-        
-        );
-        return $r;
-
     }
 // funcion para actualizar la fecha_fin de servicio_cita 
-    function updateFecha_fin (){
+      function actualizarRegistroCita()
+    {
         try {
             $JSONData = file_get_contents("php://input");
             $dataObject = json_decode($JSONData);
-
-            $fecha_fin = $dataObject->fecha_fin;           
-
-            $service = $this->updateFecha_finQuerry($fecha_fin);
-            $response = ['data' => $service];
-
-
-            header('Content-Type: application/json');
-            echo json_encode(['message' => 'Procedimiento ejecutado correctamente', 'data' => $response]);
+    
+            // Checking if id is provided
+            if (!property_exists($dataObject, 'id')) {
+                throw new \Exception("Debe proporcionar el ID del servicio_cita para actualizar");
+            }
+    
+            $id = $dataObject->id;
+    
+            $sql = "UPDATE registro_citas SET ";
+            $values = [];
             
+            if (property_exists($dataObject, 'cliente')) {
+                $sql .= "cliente = :cliente, ";
+                $values[':cliente'] = $dataObject->cliente;
+            }
+            if (property_exists($dataObject, 'costo')) {
+                $sql .= "costo = :costo, ";
+                $values[':costo'] = $dataObject->costo;
+            }
+            if (property_exists($dataObject, 'fecha_hora_inicio')) {
+                $sql .= "fecha_hora_inicio = :fecha_hora_inicio, ";
+                $values[':fecha_hora_inicio'] = $dataObject->fecha_hora_inicio;
+            }
+            if (property_exists($dataObject, 'fecha_hora_fin')) {
+                $sql .= "fecha_hora_fin = :fecha_hora_fin, ";
+                $values[':fecha_hora_fin'] = $dataObject->fecha_hora_fin;
+            }
+            if (property_exists($dataObject, 'duracion_total')) {
+                $sql .= "duracion_total= :duracion_total, ";
+                $values[':duracion_total'] = $dataObject->duracion_total;
+            }
+            if (property_exists($dataObject, 'estado')) {
+                $sql .= "estado = :estado, ";
+                $values[':estado'] = $dataObject->estado;
+            }
+            if (property_exists($dataObject, 'fecha_cita')) {
+                $sql .= "fecha_cita = :fecha_cita, ";
+                $values[':fecha_cita'] = $dataObject->fecha_cita;
+            }
+            if (property_exists($dataObject, 'desc_rechazo')) {
+                $sql .= "desc_rechazo = :desc_rechazo, ";
+                $values[':desc_rechazo'] = $dataObject->desc_rechazo;
+            }
+    
+            // Remove trailing comma and add WHERE clause
+            $sql = rtrim($sql, ', ') . " WHERE id = :id";
+            $values[':id'] = $id;
+    
+            $stmt = $this->conexion->getPDO()->prepare($sql);
+            $stmt->execute($values);
+    
+            $rowsAffected = $stmt->rowCount();
+    
+            if ($rowsAffected === 0) {
+                throw new \Exception("No se encontró el cliente con el ID proporcionado");
+            }
+    
+            header('Content-Type: application/json');
+            echo json_encode(['message' => 'Cliente actualizado exitosamente.']);
+            http_response_code(200);
+    
         } catch (\Exception $e) {
             $errorResponse = ['message' => "Error en el servidor: " . $e->getMessage()];
             header('Content-Type: application/json');
             echo json_encode($errorResponse);
             http_response_code(500);
         }
-    }
-
-    function updateFecha_finQuerry($fecha_fin) {
-        // aca va la consulta que hacer el update 
-        $r = table::queryParams("CALL consulta(:fecha_fin)",
-            
-            [
-                'fecha_fin'=> $fecha_fin,
-            ]
-        
-        );
-        return $r;
-
     }
 // funcion para actualizar fecha_inicio y fecha_fin de servicio_cita 
     function updataFechasCitas (){
