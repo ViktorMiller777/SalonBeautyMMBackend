@@ -14,16 +14,17 @@ class Usuario extends Models{
     public $user;
     public $apellido_paterno;
     public $apellido_materno;
-    public $correo;
+    public $nombre;
     public $contrasena;
     public $telefono;
     public $id_rol;
 
     protected $filleable=[
+        "id",
         "user",
         "apellido_paterno",
         "apellido_materno",
-        "correo",
+        "nombre",
         "contrasena",
         "telefono",
         "id_rol",

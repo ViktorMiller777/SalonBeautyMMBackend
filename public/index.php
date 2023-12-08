@@ -16,6 +16,9 @@ use proyecto\Response\Success;
 Router::headers();
 
 //Metodos post//
+Router::post('/servicio_cita/actualizar',[ServiciosCitasController::class,"actualizarServicioCita"]);
+Router::post('/registro_citas/actualizar',[RegistroCitasController::class,"actualizarRegistroCita"]);
+Router::post('/eliminar_servicio',[ServiciosCitasController::class,"borrar_cita"]);
 Router::post('/registrar_usuario',[UsuariosController::class,"Register"]);
 Router::post('/auth',[UsuariosController::class,"auth"]);
 Router::post('/crear_sc_calendario',[ServiciosCitasController::class,'crear_cita']);

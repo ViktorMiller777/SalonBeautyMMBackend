@@ -14,7 +14,6 @@ class Registro_cita extends Models{
     public $duracion_total;
     public $estado;
     public $fecha_cita;
-    public $tipo;
     public $desc_rechazo;
 
     protected $filleable=[
@@ -25,7 +24,6 @@ class Registro_cita extends Models{
         "duracion_total",
         "estado",
         "fecha_cita",
-        "tipo",
         "desc_rechazo",
     ];
 

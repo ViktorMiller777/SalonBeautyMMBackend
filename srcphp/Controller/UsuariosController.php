@@ -19,14 +19,16 @@ class UsuariosController{
             $JSONData = file_get_contents('php://input');
             $dataObject = json_decode($JSONData);
             $user = new Usuario();
-            $user->user=$dataObject->user;
+            $user->nombre=$dataObject->nombre;
             $user->apellido_paterno=$dataObject->apellido_paterno;
             $user->apellido_materno=$dataObject->apellido_materno;
-            $user->correo=$dataObject->correo;
+            $user->user=$dataObject->user;
             $user->contrasena=$dataObject->contrasena;
             $user->telefono=$dataObject->telefono;
             $user->Save();
 
+            $r = new Success($user);
+            return $r->send();
         } catch (error) {
             console.error('error en nose donde');
         }

@@ -21,12 +21,9 @@
          * @param string $user
          * @param string $password
          */
-        public function __construct(string $dbname, string $host, string $user, string $password)
+        public function __construct()
         {
-            $this->dbname = $dbname;
-            $this->host = $host;
-            $this->user = $user;
-            $this->password = $password;
+
         }
         /**
          * @return mixed
@@ -78,7 +75,7 @@
             return $this->user;
         }
         /**
-        return         * @param string $user
+        *return         * @param string $user
          */
         public function setUser(string $user): void
         {
@@ -101,7 +98,7 @@
         public function getPDO():PDO
         {
             try {
-                $dsn = "mysql:host=localhost;dbname=$this->dbname";
+                $dsn = "mysql:host=$this->host;dbname=$this->dbname";
                 if (self::$DB == null) {
                     self::$DB = new PDO($dsn, $this->user, $this->password);
                 }
