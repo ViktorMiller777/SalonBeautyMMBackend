@@ -19,13 +19,15 @@ class Table
 
 
 }
-    static function query($query)
-    {
-        $cc = new  Conexion();
-        self::$pdo = $cc->getPDO();
-        $stmt = self::$pdo->query($query);
-        $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $resultados;
-    }
+
+static function query($query)
+{
+    $cc = new  Conexion('estetica','localhost','root','04063017');
+    self::$pdo = $cc->getPDO();
+    $stmt = self::$pdo->query($query);
+    $resultados = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $resultados;
+}
+
 
 }

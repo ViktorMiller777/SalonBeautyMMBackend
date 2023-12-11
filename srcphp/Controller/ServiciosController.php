@@ -13,7 +13,8 @@ use proyecto\Conexion;
 class ServiciosController{
     private $conexion;
     public function __construct() {
-        $this->conexion = new Conexion();
+        $this->conexion = new  Conexion("estetica","localhost","root","04063017");
+            
     }
     
     public function servicios(){

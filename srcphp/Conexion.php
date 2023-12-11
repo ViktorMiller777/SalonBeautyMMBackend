@@ -11,9 +11,9 @@
          */
         public static $DB = null;
         public $dbname = "estetica";
-        public $host = "127.0.0.1:3307";
+        public $host = "localhost";
         public $user = "root";
-        public $password = "";
+        public $password = "04063017";
         /**ic
          * Conexion constructor.
          * @param string $dbname
@@ -21,10 +21,15 @@
          * @param string $user
          * @param string $password
          */
-        public function __construct()
+        public function __construct(string $dbname, string $host, string $user, string $password)
         {
-
+            $this->dbname = $dbname;
+            $this->host = $host;
+            $this->user = $user;
+            $this->password = $password;
         }
+
+
         /**
          * @return mixed
          */

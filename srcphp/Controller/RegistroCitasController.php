@@ -11,7 +11,8 @@ use proyecto\Conexion;
 class RegistroCitasController{
     private $conexion;
     public function __construct() {
-        $this->conexion = new Conexion();
+        $this->conexion = new  Conexion("estetica","localhost","root","04063017");
+            
     }
     public function registros(){
         $res=Table::query("   Select cita.id as id,(select id from usuarios where cita.cliente=id) as id_cliente,(select concat(nombre,' ',apellido_paterno,' ',apellido_materno) from usuarios where cita.cliente=id)as cliente, (select telefono from usuarios where cita.cliente=id) as telefono, (select user from usuarios where cita.cliente=id) as correo, cita.costo as costo, concat(DATE_FORMAT(cita.fecha_hora_inicio, '%Y/%m/%d %H:%i'),' - ',DATE_FORMAT(time(cita.fecha_hora_fin), '%H:%i')) as fecha,
