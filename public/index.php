@@ -16,6 +16,10 @@ use proyecto\Response\Success;
 Router::headers();
 
 //Metodos post//
+Router::post('/servicio/actualizar',[ServiciosController::class,"actualizarServicio"]);
+Router::post('/categoria/actualizar',[CategoriasController::class,"actualizarCategoria"]);
+Router::post('/crear_servicio',[ServiciosController::class,'crear_servicio']);
+Router::post('/crear_categoria',[CategoriasController::class,'crear_categoria']);
 Router::post('/servicio_cita/actualizar',[ServiciosCitasController::class,"actualizarServicioCita"]);
 Router::post('/registro_citas/actualizar',[RegistroCitasController::class,"actualizarRegistroCita"]);
 Router::post('/eliminar_servicio',[ServiciosCitasController::class,"borrar_cita"]);
@@ -29,10 +33,13 @@ Router::get('/servicios',[ServiciosController::class,'servicios']);
 Router::get('/registro_citas',[RegistroCitasController::class,'registros']);
 Router::get('/categorias',[CategoriasController::class,'categories']);
 Router::get('/citas_calendario',[RegistroCitasController::class,'citas']);
+Router::get('/citas_calendario_cliente',[RegistroCitasController::class,'citasCliente']);
 Router::get('/servicio_citas_calendario',[ServiciosCitasController::class,'mostrar']);
 Router::get('/servicios_calendario',[ServiciosController::class,'mostrar']);
 Router::get('/servicio_bloqueos_calendario',[ServiciosCitasController::class,'mostrar_bloqueos']);
-
+Router::get('/servicios_nombre',[ServiciosCitasController::class,'servicios_Nombre']);
+Router::get('/servicios_activos',[ServiciosController::class,'servicios_act']);
+Router::get('/categorias_activos',[CategoriasController::class,'categories_act']);
 
 Router::get('/usuario/buscar/$id', function ($id) {
 

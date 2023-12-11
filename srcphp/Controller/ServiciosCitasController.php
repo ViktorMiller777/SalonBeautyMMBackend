@@ -20,6 +20,12 @@ class ServiciosCitasController{
         $res=new Success($res);
         $res->Send();
     }
+    public function servicios_Nombre(){
+        $res=Table::query("        
+        select (select nombre from servicios where id = sc.id_servicio) as nombre, id_cita from servicio_cita as sc;");
+        $res=new Success($res);
+        $res->Send();
+    }
     public function mostrar(){
         $res=Table::query("select servCita.id as id,servCita.id_cita as idCita,servCita.id_servicio as idServicio,servCita.precio as precio,
         servCita.duracion_min as duracion,servCita.fecha_hora as fechaServicio,servCita.tipo as tipo,servicio.categoria 

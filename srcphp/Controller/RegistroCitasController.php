@@ -14,17 +14,22 @@ class RegistroCitasController{
         $this->conexion = new Conexion();
     }
     public function registros(){
-        $res=Table::query('select registro_citas.id, usuarios.nombre as cliente, servicios.nombre as servicio,
-        registro_citas.costo, registro_citas.duracion_total, registro_citas.fecha_hora_inicio, registro_citas.fecha_cita
-        from registro_citas inner join usuarios on registro_citas.cliente=usuarios.id
-        inner join servicio_cita on registro_citas.id=servicio_cita.id_cita
-        inner join servicios on servicio_cita.id_servicio=servicios.id;');
+        $res=Table::query("   Select cita.id as id,(select id from usuarios where cita.cliente=id) as id_cliente,(select concat(nombre,' ',apellido_paterno,' ',apellido_materno) from usuarios where cita.cliente=id)as cliente, (select telefono from usuarios where cita.cliente=id) as telefono, (select user from usuarios where cita.cliente=id) as correo, cita.costo as costo, concat(DATE_FORMAT(cita.fecha_hora_inicio, '%Y/%m/%d %H:%i'),' - ',DATE_FORMAT(time(cita.fecha_hora_fin), '%H:%i')) as fecha,
+        DATE_FORMAT(cita.fecha_cita, '%Y/%m/%d %H:%i') as fecha_de_creacion, cita.estado as estado
+        from registro_citas as cita;");
         $res=new Success($res);
         $res->Send();
     }
     public function citas(){
         $res=Table::query('
         select id,fecha_hora_inicio as fechaInicio,duracion_total as duracionTotal,cliente as clienteId from registro_citas where estado = "confirmado";');
+        $res=new Success($res);
+        $res->Send();
+    }
+
+    public function citasCliente(){
+        $res=Table::query('
+        select id,fecha_hora_inicio as fechaInicio,duracion_total as duracionTotal,cliente as clienteId from registro_citas where estado = "confirmado" or estado = "sin_confirmar";');
         $res=new Success($res);
         $res->Send();
     }

@@ -11,7 +11,7 @@
          */
         public static $DB = null;
         public $dbname = "estetica";
-        public $host = "localhost";
+        public $host = "127.0.0.1:3307";
         public $user = "root";
         public $password = "";
         /**ic
